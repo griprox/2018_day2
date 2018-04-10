@@ -12,10 +12,21 @@ def find_maxima(x):
     Output:
         idx -- list of indices of the local maxima in x
     """
+    if len(x) < 1:
+        return []
+
+    if len(x) == 1:
+        return [0]
 
     idx = []
-    for i in range(len(x)):
+    if x[0] > x[1]:
+        idx.append(0)
+
+    for i in range(1, len(x) - 1):
         # `i` is a local maximum if the signal decreases before and after it
         if x[i-1] < x[i] and x[i+1] < x[i]:
             idx.append(i)
+
+    if x[-1] > x[-2]:
+        idx.append(len(x) - 1)
     return idx
